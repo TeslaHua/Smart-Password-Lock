@@ -1,0 +1,86 @@
+C51 COMPILER V9.02   LCD1602                                                               12/19/2015 20:58:45 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE LCD1602
+OBJECT MODULE PLACED IN .\LCD1602.obj
+COMPILER INVOKED BY: E:\KEIL C51\C51\BIN\C51.EXE ..\SOURCE\LCD1602.c BROWSE INCDIR(..\HEADER) DEBUG OBJECTEXTEND PRINT(.
+                    -\LCD1602.lst) OBJECT(.\LCD1602.obj)
+
+line level    source
+
+   1          #include"LCD1602.h"
+   2          
+   3          
+   4          /*
+   5          功能描述：ms级延时函数
+   6          返回值：无
+   7          参数：外层循环次数
+   8          */
+   9          void Delayms(uchar c)   //延时在1~2毫秒    
+  10          {
+  11   1          uchar a,b;
+  12   1              for (a=c; a>0; a--) 
+  13   1                      for(b=15;b>0;b--);      
+  14   1      }
+  15          
+  16          /*
+  17          功能描述：写命令
+  18          返回值：无
+  19          参数：8位的命令数据
+  20          */
+  21          void lcdwritecom(uchar com)                 //写入命令
+  22          {
+  23   1              E = 0;   //使能清零
+  24   1              RS = 0;  //选择写入命令
+  25   1              LCD = com;      //由于4位的接线是接到P0口的高四位，所以传送高四位不用改
+  26   1              Delayms(40);
+  27   1              E=1;
+  28   1              Delayms(40);
+  29   1              E=0;
+  30   1      }       
+  31          
+  32          /*
+  33          功能描述：写数据
+  34          返回值：无
+  35          参数：8位的数据
+  36          */   
+  37          void lcdwritedate(uchar dat)                    //写入数据
+  38          {
+  39   1              E = 0;   //使能清零
+  40   1              RS = 1;  //选择写入命令 
+  41   1              LCD = dat;      //由于4位的接线是接到P0口的高四位，所以传送高四位不用改
+  42   1              Delayms(40);
+  43   1              E=1;
+  44   1              Delayms(40);
+  45   1              E=0;
+  46   1      } 
+  47          
+  48          /*
+  49          功能描述：LCD1602初始化
+  50          返回值：无
+  51          参数：无
+  52          */  
+  53          void lcdinit()              //LCD初始化子程序
+  54          {       
+C51 COMPILER V9.02   LCD1602                                                               12/19/2015 20:58:45 PAGE 2   
+
+  55   1              RW = 0;
+  56   1              lcdwritecom(0x38);  //显示模式设置，16*2显示，5*7点阵，8位数据接口
+  57   1              lcdwritecom(0x0C);  //开显示，不显示光标，光标不移动
+  58   1              lcdwritecom(0x06);  //写一个指针加1
+  59   1              lcdwritecom(0x01);  //清屏
+  60   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     67    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,247 @@
+C51 COMPILER V9.02   MAIN                                                                  12/19/2015 20:58:45 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\main.obj
+COMPILER INVOKED BY: E:\KEIL C51\C51\BIN\C51.EXE ..\MAIN\main.c BROWSE INCDIR(..\HEADER) DEBUG OBJECTEXTEND PRINT(.\main
+                    -.lst) OBJECT(.\main.obj)
+
+line level    source
+
+   1          /*********************************************************************************************************
+             -****
+   2          ´úÂë¹¦ÄÜ£º±¾ÃÜÂëËø·ÖÎªÃÅÍâÃÅÄÚÁ½²¿·Ö¡£ÔÚÃ»ÈËµÄÓÃ»§È¨ÏÞ¸ß£¬²ÉÓÃºìÍâÒ£¿ØÆ÷ÊäÈë£¬¾ùÊÇ8Î»ÃÜÂë£¬0~9µÄÊý×ÖÃÜÂëÓÐ
+             -Ð§£¬
+   3                            ÃÅÄÚÓÃ»§¿ÉÒÔÊäÈëÃÜÂë¿ªËø£¬ÊäÈëÃÜÂë´íÎóÐ¡ÓÚÈý´ÎÊ±£¬ºìµÆÉÁË¸Á½Ãë£¬µ±ÃÜÂëÊäÈëÈý´Î´íÎóÊ±£¬·äÃùÆ÷±¨¾¯5s£¬ÃÜ
+             -ÂëËø
+   4                            Ëø×¡£¬ÃÅÄÚÓÃ»§ÎÞ·¨ÊäÈëÃÜÂë¡£µ±ÓÃ»§Êä¶ÔÃÜÂëºó£¬£¨Ö»ÓÐÊäÈëÃÜÂëÕýÈ·ºó²ÅÓÐ´ËÈ¨ÏÞ£©¿ÉÒÔ°´£¨0x46£©¼üÉèÖÃÐÂÃÜ
+             -Âë£¬
+   5                            µ±ÊäÈëµÄÃÜÂë¹»8Î»Ê±°´ÏÂ£¨EQ£©¼üÔÙ´ÎÈ·ÈÏÊäÈëµÄÐÂÃÜÂë£¬ÈôÁ½´ÎÊäÈëµÄÃÜÂëÏàÍ¬ÔòÐÂÃÜÂëÉèÖÃ³É¹¦£¬·ñÔòÊ§°Ü¡£¶
+             -øÇÒ
+   6                            µ±ÓÃ»§ÊäÈëµÄÐÂÃÜÂë²»¹»8Î»¾Í°´ÏÂ£¨EQ£©¼üÊ±£¬ÏµÍ³Ö±½ÓÌáÊ¾ÐÂÃÜÂëÉèÖÃ´íÎó¡££¨³É¹¦ÓëÊ§°Ü¶¼ÊÇÂÌµÆÁÁ£¬·äÃùÆ÷±
+             -¨¾¯£©
+   7                            ÃÅÄÚµÄÓÃ»§»¹ÓÐÊ±¼ä¹¦ÄÜ£¬ÓÃ»§°´ÏÂ£¨0x47£©¼üÊ±£¬ÏÔÊ¾ÆÁÏÔÊ¾µ±Ç°µÄÊ±¼ä¡£»¹Ö§³ÖÒ»¼ü¿ªËø¹¦ÄÜ£¬µ±ÓÃ»§ÊäÈë£¨0x
+             -45£©¼üÊ±
+   8                            ÏµÍ³×Ô¶¯¿ªËø£¬5sºó»Ö¸´Ô­Ê¼×´Ì¬¡£ÃÅÍâµÄÓÃ»§µÄÈ¨ÏÞÏà¶Ô¼òµ¥£¬ÀûÓÃ¾ØÕó¼üÅÌÊäÈë8Î»ÃÜÂë£¬µÚ11¸ö¼ü±íÊ¾Çå³ýÖ®Ç
+             -°ÊäÈëµÄ
+   9                            Ò»Î»ÃÜÂë£¬ÈôÒ»Î»ÃÜÂë¶¼Ã»ÊäÈë¾Í°´ÏÂ´Ë¼ü£¬ÏµÍ³ÌáÊ¾ÓÃ»§»¹Ã»ÓÐÊäÈëÃÜÂë£»µÚ12¸ö¼ü±íÊ¾ÃÜÂëÊäÈëÍê³É£¬µ±ÓÃ»§Êä
+             -ÈëµÄÃÜÂë
+  10                            Î»Êý²»¹»¾Í°´ÏÂ´Ë¼üÊ±£¬ÏµÍ³ÌáÊ¾ÓÃ»§ÊäÈëµÄÃÜÂëÎ»Êý²»¹»¡£
+  11          
+  12          Ê±¼ä£º2015/11/19
+  13          **********************************************************************************************************
+             -*********/
+  14          
+  15          
+  16          #include"Base.h"
+  17          #include"LCD1602.h"
+  18          #include"LedAndBuzzer.h"
+  19          #include"Keyboard.h"
+  20          #include"At24c02.h"
+  21          #include"DS1302.h"
+  22          
+  23          uchar Compare_flag=0,finish_flag=0,AllowModify_flag=0; //Compare_flagµÄ×÷ÓÃÊÇ±êÖ¾×Å¿ÉÒÔ½øÐÐ±È½ÏÊäÈëµÄÃÜÂëÊ
+             -Ç·ñÕýÈ·ÁË;finish_flag×÷ÓÃ¿ØÖÆÏÔÊ¾ÊäÈëÐÂÃÜÂëµÄ±êÖ¾£¬¾ÍÊÇCDIS1ºÍCDIS2;
+  24                                                                 //AllowModify_flagµÄ×÷ÓÃÊÇÒªÐÞ¸ÄÃÜÂëÊ±µÄ±êÖ¾Î»(Ö»ÓÐ
+             -Êä¶ÔÃÜÂëºó²ÅÄÜÐÞ¸ÄÃÜÂë)
+  25          uchar Timer_flag=0;                                    //´Ë±êÖ¾Î»µÄ×÷ÓÃÓÃÀ´Çø·ÖÊÇÃÜÂëÕýÈ·ºó´¥·¢µÄ¶¨Ê±ÖÐ¶Ï£
+             -¨0£©£¬»¹ÊÇÃÜÂë´íÎóÐ¡ÓÚÈý´Î´¥·¢µÄÖÐ¶Ï£¨2£©£¬ÓÖ»òÕßÊÇÃÜÂë´íÎó
+  26                                                                 //µÈÓÚÈý´Î¶ø´¥·¢µÄÖÐ¶Ï£¨1£©
+  27          uchar First_flag=0;        //µÚÒ»´ÎÉèÖÃÐÂÃÜÂëµÄ±êÖ¾
+  28          uchar Second_flag=0;   //µÚ¶þ´ÎÉèÖÃÐÂÃÜÂëµÄ±êÖ¾
+  29          
+  30          uchar Value1[8]; //Ô­Ê¼ÃÜÂë£º12345678£¨ÉèÖÃÐÂÃÜÂëºóÒª°Ñ´Ë´¦ÇåÁãÖØÐÂÏÂÔØ£©
+  31          //={0x0c,0x18,0x5e,0x08,0x1c,0x5a,0x42,0x52}
+  32          uchar Value2[9];//Ç°°ËÎ»ÓÃÀ´½ÓÊÕÓÃ»§ÊäÈëµÄÃÜÂëÒÔ±ãºÍÔ­Ê¼ÃÜÂë±È½Ï£¬×îºóÒ»Î»ÓÃÀ´½ÓÊÕÈ·ÈÏ°´¼üÖµ
+  33          uchar Value3[9];//Ç°°ËÎ»ÓÃÀ´´æ·ÅÓÃ»§ÐÂÉè¶¨µÄÃÜÂëµÄÁÙÊ±Êý×é£¬×îºóÒ»Î»ÓÃÀ´½ÓÊÕÈ·ÈÏ°´¼üÖµ
+  34          
+  35          uchar count=0;      //´æ·Å´íÎóµÄ´ÎÊý  
+  36          uchar set_count=0;  //¼ÇÂ¼´ÓÁÙÊ±¿Õ¼äÒÆÈëÃÜÂë´æ´¢¿Õ¼äµÄ¸öÊý
+  37          
+  38          uchar code CDIS1[]={"PLEASE ENTER THE"};  //ÌáÐÑÊäÈëÃÜÂë
+  39          uchar code CDIS2[]={"CODE:  -------- "};
+  40          uchar code CDIS3[]={"SORRY , AGAIN  !"};  //ÌáÐÑÃÜÂë´íÎó£¬ÖØÐÂÊäÈë
+  41          uchar code CDIS4[]={" CODE IS RIGHT !"};  //ÌáÐÑÃÜÂëÕýÈ·
+C51 COMPILER V9.02   MAIN                                                                  12/19/2015 20:58:45 PAGE 2   
+
+  42          uchar code CDIS5[]={" OPEN  SESAME. !"};
+  43          
+  44          uchar code CDIS10[]={"  PASSWORD SET  "};   //ÌáÊ¾ÓÃ»§ÃÜÂëÉèÖÃ³É¹¦
+  45          uchar code CDIS11[]={"  SUCCESSFULLY !"};
+  46          uchar code CDIS12[]={"  PASSWORD SET  "};       //ÌáÊ¾ÓÃ»§ÃÜÂëÉèÖÃÊ§°Ü
+  47          uchar code CDIS13[]={"     FAILED    !"};  
+  48               
+  49          void Judge_RightOrWrong();          //ÅÐ¶ÏÓÃ»§ÊäÈëµÄÃÜÂëÕýÎó
+  50          void Init();                    //ºìÍâµÈ³õÊ¼»¯ÉùÃ÷
+  51          void Display(uchar CDIS1[],uchar CDIS2[]); //ÏÔÊ¾ÔÚLCD1602ÉÏµÄ¾ßÌåÄÚÈÝ
+  52          
+  53          /*
+  54          ¹¦ÄÜÃèÊö£º³ÌÐòÖ÷º¯ÊýÈë¿Ú
+  55          ·µ»ØÖµ£ºÎÞ
+  56          ²ÎÊý£ºÎÞ
+  57          */
+  58          void main()
+  59          {
+  60   1              uchar i=0;
+  61   1              Init();      //ºìÍâÒÔ¼°ÖÐ¶Ï³õÊ¼»¯       
+  62   1              lcdinit();   //1602³õÊ¼»¯
+  63   1              Ds1302init();//DS1302³õÊ¼»¯º¯Êý
+  64   1              Display(CDIS1,CDIS2); //LCD1602µÄ¹Ì¶¨ÏÔÊ¾²¿·Ö
+  65   1              //SerialInit();       //´®¿Ú³õÊ¼»¯
+  66   1              while(1)
+  67   1              {               
+  68   2                      Key_scan();
+  69   2                      if(First_flag==1)         //ËµÃ÷µÚÒ»´ÎÐÂÃÜÂëÒÑ¾­Éè¶¨ºÃÁË
+  70   2                      {
+  71   3                              if(Second_flag==1)    //ËµÃ÷µÚ¶þ´ÎÐÂÃÜÂëÒÑ¾­Éè¶¨ºÃÁË
+  72   3                              {
+  73   4                                      EX0=0;   //¹Ø±ÕÍâ²¿ÖÐ¶Ï0£¬·ÀÖ¹ÂÒÈë
+  74   4                                      if(Value2[0]==Value3[0]&&Value2[1]==Value3[1]&&Value2[2]==Value3[2]&&Value2[3]==Value3[3]
+  75   4                                              &&Value2[4]==Value3[4]&&Value2[5]==Value3[5]&&Value2[6]==Value3[6]&&Value2[7]==Value3[7]) //Á½´ÎÃÜÂë½
+             -øÐÐ±È½Ï
+  76   4                                      {
+  77   5                                              Display(CDIS10,CDIS11); //LCD1602µÄ¹Ì¶¨ÏÔÊ¾²¿·Ö,ÌáÊ¾ÓÃ»§ÐÂÃÜÂëÉè¶¨³É¹¦
+  78   5                                              //ÒÔÏÂ´úÂëÎªÍùAT24C02µÄ³õÊ¼µØÖ·Îª0µÄÁ¬Ðø8¸ö¿Õ¼äÄÚ´æÓÃ»§³É¹¦ÐÞ¸ÄÖ®ºóµÄÐÂµÄ8Î»ÃÜÂë²¢¸²¸ÇµôÔ­À´µÄ
+  79   5      
+  80   5                                              At24c02Write(0,Value2);
+  81   5      
+  82   5                                              //ÒÔÉÏ´úÂëÎªÍùAT24C02µÄ³õÊ¼µØÖ·Îª0µÄÁ¬Ðø8¸ö¿Õ¼äÄÚ´æÓÃ»§³É¹¦ÐÞ¸ÄÖ®ºóµÄÐÂµÄ8Î»ÃÜÂë²¢¸²¸ÇµôÔ­À´µÄ
+  83   5                                      }
+  84   4                                      else
+  85   4                                              Display(CDIS12,CDIS13); //LCD1602µÄ¹Ì¶¨ÏÔÊ¾²¿·Ö,ÌáÊ¾ÓÃ»§ÐÂÃÜÂëÉè¶¨Ê§°Ü
+  86   4      
+  87   4                                      First_flag=0;
+  88   4                                      Second_flag=0;  //±íÊ¾Á½´ÎÉèÖÃÃÜÂë¶¼ÒÑ¾­Íê³É£¬·µ»ØÕý³£
+  89   4      
+  90   4                                      Timer_flag=0;  //ºÍÊä¶ÔÃÜÂëµÄÐ§¹ûÒ»Ñù£¬·äÃùÆ÷ÌáÊ¾Á½Ãë
+  91   4                                      BuzzerOpenOrClose(buzzer_on);
+  92   4                                      TR0=1;
+  93   4                              }                                       
+  94   3                      }
+  95   2                      Judge_RightOrWrong();        //ÅÐ¶ÏÓÃ»§ÊäÈëµÄÃÜÂëÕýÎó           
+  96   2              }
+  97   1      }
+  98          
+  99          /*
+ 100          ¹¦ÄÜÃèÊö£º³õÊ¼»¯º¯Êý£¬°üÀ¨¶¨Ê±Æ÷0ÖÐ¶ÏºÍÍâ²¿ÖÐ¶Ï0
+ 101          ·µ»ØÖµ£ºÎÞ
+ 102          ²ÎÊý£ºÎÞ
+C51 COMPILER V9.02   MAIN                                                                  12/19/2015 20:58:45 PAGE 3   
+
+ 103          */                                                                       
+ 104          void Init()
+ 105          {
+ 106   1              //ÒÔÏÂ´úÂëÎªÍùAT24C02µÄ³õÊ¼µØÖ·Îª0µÄÁ¬Ðø8¸ö¿Õ¼äÄÚ´æ´¢Ô­Ê¼8Î»ÃÜÂë£¨µÚÒ»±ßÏÂÔØ³ÌÐòÊ±±£Áô£¬µÚ¶þ´ÎÏÂÔØÊ±ÒªÉ¾³
+             -ý´Ë¶Î´úÂë£©
+ 107   1      
+ 108   1              //At24c02Write(0,Value1);
+ 109   1      
+ 110   1              //ÒÔÉÏ´úÂëÎªÍùAT24C02µÄ³õÊ¼µØÖ·Îª0µÄÁ¬Ðø8¸ö¿Õ¼äÄÚ´æ´¢Ô­Ê¼8Î»ÃÜÂë£¨µÚÒ»±ßÏÂÔØ³ÌÐòÊ±±£Áô£¬µÚ¶þ´ÎÏÂÔØÊ±ÒªÉ¾³
+             -ý´Ë¶Î´úÂë£©
+ 111   1      
+ 112   1          LightOrClose(green,led_off);    //³õÊ¼»¯ÈÃÂÌµÆÃð
+ 113   1              LightOrClose(red,led_off);          //³õÊ¼»¯ÈÃºìµÆÃð
+ 114   1              IT0=1; //ÏÂ½µÑØ´¥·¢
+ 115   1              EX0=1; //´ò¿ªÖÐ¶Ï0ÔÊÐí
+ 116   1              IRIN=1;//³õÊ¼»¯ºìÍâ¶Ë¿Ú
+ 117   1      
+ 118   1              //¶¨Ê±Æ÷0Ö÷Òª¹¦ÄÜÊÇ·´Ó¦ÊäÈëÃÜÂëµÄÕýÎóµÄ·´À¡
+ 119   1              TMOD=0X01;//¶¨Ê±Æ÷0Ñ¡Ôñ·½Ê½1
+ 120   1              TH0=0X0FA;  //³õÖµ64000.¼ÆÊý1536¸öÊý
+ 121   1              TL0=0X00;
+ 122   1              ET0=1;  //¿ª¶¨Ê±Æ÷0ÖÐ¶Ï
+ 123   1              
+ 124   1      
+ 125   1              EA=1;  //´ò¿ª×ÜÖÐ¶Ï
+ 126   1      }
+ 127          
+ 128          /*
+ 129          ¹¦ÄÜÃèÊö£ºÅÐ¶ÏÓÃ»§ÊäÈëµÄÃÜÂëÕýÎó£¬²¢×÷³öÏàÓ¦µÄ·´À¡
+ 130          ·µ»ØÖµ£ºÎÞ
+ 131          ²ÎÊý£ºÎÞ
+ 132          */
+ 133          void Judge_RightOrWrong()
+ 134          {
+ 135   1              if(Compare_flag==1)  //±íÊ¾ÓÃ»§ÃÜÂëÊäÈëÍê³É£¬¿ÉÒÔ½øÐÐ±È½ÏÁË
+ 136   1              {
+ 137   2                      Compare_flag=0;
+ 138   2                      //ÒÔÏÂ´úÂëÎªÍùAT24C02µÄ³õÊ¼µØÖ·Îª0µÄÁ¬Ðø8¸ö¿Õ¼äÄÚ¶ÁÈ¡8Î»ÃÜÂë²¢·ÅÔÚValue1[]Êý×éÖÐ£¬ºÍÓÃ»§ÊäÈëµÄValue2[]ÃÜ
+             -Âë±È½Ï
+ 139   2      
+ 140   2                      At24c02Read(0,Value1);
+ 141   2      
+ 142   2                      //ÒÔÏÂ´úÂëÎªÍùAT24C02µÄ³õÊ¼µØÖ·Îª0µÄÁ¬Ðø8¸ö¿Õ¼äÄÚ¶ÁÈ¡8Î»ÃÜÂë²¢·ÅÔÚValue1[]Êý×éÖÐ£¬ºÍÓÃ»§ÊäÈëµÄValue2[]ÃÜ
+             -Âë±È½Ï
+ 143   2                      if(Value1[0]==Value2[0]&&Value1[1]==Value2[1]&&Value1[2]==Value2[2]&&Value1[3]==Value2[3]
+ 144   2                              &&Value1[4]==Value2[4]&&Value1[5]==Value2[5]&&Value1[6]==Value2[6]&&Value1[7]==Value2[7]) //Èç¹ûÃÜÂëÕýÈ
+             -·
+ 145   2                      {
+ 146   3                              Display(CDIS4,CDIS5);//LCD1602µÄ¹Ì¶¨ÏÔÊ¾²¿·Ö
+ 147   3                              LightOrClose(green,led_on);//ÊäÈëÕýÈ·Ê±ÏÔÊ¾ÂÌµÆ
+ 148   3                              Timer_flag=0;        //±íÊ¾´ËÊ±µÄ¶¨Ê±Æ÷ÖÐ¶ÏÊÇ¿ªÃÅ³É¹¦ÁË
+ 149   3                              BuzzerOpenOrClose(buzzer_on);
+ 150   3                              AllowModify_flag=1;  //Êä¶ÔÃÜÂëÖ®ºó±íÊ¾¿ÉÒÔÐÞ¸ÄÃÜÂë£¬Ñ¡ÔñMode¼ü
+ 151   3                              count=0;
+ 152   3                              EX0=0;      //¹Ø±ÕÍâ²¿ÖÐ¶Ï0£¬ÎÞ·¨ÊäÊý
+ 153   3                              TR0=1;          //¿ª¶¨Ê±Æ÷0
+ 154   3                      }
+ 155   2                      else            //ÖÁÉÙÓÐÒ»¸öÃÜÂë´íÎó
+ 156   2                      {
+ 157   3                              Display(CDIS3,CDIS2);  //LCD1602µÄ¹Ì¶¨ÏÔÊ¾²¿·Ö
+ 158   3                              count++;               //´íÎóµÄ´ÎÊý
+ 159   3                              if(count==3)           //Èý´ÎÊäÈë´íÎó
+C51 COMPILER V9.02   MAIN                                                                  12/19/2015 20:58:45 PAGE 4   
+
+ 160   3                              {
+ 161   4                                      count=0;          //ÇåÁã£¬ÒÔ±ãÏÂÒ»¸öÈý´Î´íÎóÏÔÊ¾
+ 162   4                                      Timer_flag=1;     //ÊäÈëµÄÃÜÂë´ÎÊýµÈÓÚ3´ÎÁË
+ 163   4                                      LightOrClose(red,led_on);//ÊäÈëÕýÈ·Ê±ÏÔÊ¾ÂÌµÆ
+ 164   4                                      BuzzerOpenOrClose(buzzer_on);
+ 165   4                                      EX0=0;            //¹Ø±ÕÍâ²¿ÖÐ¶Ï0£¬ÎÞ·¨ÊäÊý
+ 166   4                                      TR0=1;                //¿ª¶¨Ê±Æ÷0
+ 167   4                              }
+ 168   3                              else
+ 169   3                              {  
+ 170   4                                  Timer_flag=2; //ÓÃ»§Êä´íµÄÃÜÂë´ÎÊýÐ¡ÓÚ3
+ 171   4                                  EX0=0;        //¹Ø±ÕÍâ²¿ÖÐ¶Ï0£¬ÎÞ·¨ÊäÊý
+ 172   4                                  TR0=1;                //¿ª¶¨Ê±Æ÷0
+ 173   4                              }                          
+ 174   3                      }
+ 175   2              }               
+ 176   1      }
+ 177          
+ 178          
+ 179          /*
+ 180          ¹¦ÄÜÃèÊö£ºLCD1602µÄ¾ßÌåÏÔÊ¾ÄÚÈÝ
+ 181          ·µ»ØÖµ£ºÎÞ
+ 182          ²ÎÊý£º  ÏÔÊ¾ÔÚ1602µÚÒ»ÅÅµÄ×ÖÄ¸CDIS1[];ÏÔÊ¾ÔÚ1602µÚ¶þÅÅµÄ×ÖÄ¸CDIS2[]
+ 183          */
+ 184          void Display(uchar CDIS1[],uchar CDIS2[])
+ 185          {        
+ 186   1          uchar i;
+ 187   1              lcdwritecom(0x80);
+ 188   1              for(i=0;i<16;i++)
+ 189   1              {
+ 190   2                      lcdwritedate(CDIS1[i]);
+ 191   2              }       
+ 192   1              lcdwritecom(0x80+0x40);
+ 193   1              for(i=0;i<16;i++)
+ 194   1              {
+ 195   2                      lcdwritedate(CDIS2[i]); 
+ 196   2              }
+ 197   1      }
+ 198          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    433    ----
+   CONSTANT SIZE    =    153    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     34       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
